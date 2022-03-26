@@ -22,7 +22,8 @@ const screenOptions = {
         backgroundColor:'#5350d2',
     },
     headerTitleStyle:{
-        fontSize:26
+        fontSize:26,
+        fontFamily: 'Poppins-SemiBold'
     },
     headerTintColor:'#fff',
     tabBarShowLabel: false,
@@ -41,7 +42,7 @@ const Layout = () => {
             component={HomeScreen} 
             options={{
                 tabBarIcon: ({focused }) => (
-                  <Icon name="home" color={ focused? '#5350d2': '#4c5561'} size={25} />
+                  <Icon name="home" color={ focused? '#5350d2': '#4c5561'} size={26} />
                 ),
               }}
         />
@@ -59,7 +60,7 @@ const Layout = () => {
             component={PostScreen} 
             options={{
                 tabBarIcon: ({focused }) => (
-                  <Icon name="plus" color={ focused? '#5350d2': '#4c5561'} size={25} />
+                  <Icon name="plus" color={ focused? '#5350d2': '#4c5561'} size={26} />
                 ),
               }}
         />
@@ -68,7 +69,7 @@ const Layout = () => {
             component={NotificationScreen} 
             options={{
                 tabBarIcon: ({focused }) => (
-                <Icon name="bell" color={ focused? '#5350d2': '#4c5561'} size={25} />
+                <Icon name="bell" color={ focused? '#5350d2': '#4c5561'} size={24} />
                 ),
             }}
         />
