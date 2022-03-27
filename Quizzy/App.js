@@ -1,8 +1,8 @@
 import React from 'react';
-import Layout from './layout/layout';
-
 import { Provider } from 'react-redux';
-import { store } from './redux/store';
+import { store } from './src/redux/store';
+
+import Layout from './src/layout/Layout'
 const App = () => {
   return (
     <Provider store={store}>
