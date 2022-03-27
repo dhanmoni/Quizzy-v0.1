@@ -4,11 +4,11 @@ import { Text, StyleSheet, View } from 'react-native'
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/Home/HomeScreen';
-import SearchScreen from '../screens/Search/SearchScreen';
-import PostScreen from '../screens/Post/PostScreen';
-import NotificationScreen from '../screens/Notification/NotificationScreen';
-import ProfileScreen from '../screens/Profile/ProfileScreen';
+import HomeScreen from '../screens/HomeScreen';
+import SearchScreen from '../screens/SearchScreen';
+import PostScreen from '../screens/PostScreen';
+import NotificationScreen from '../screens/NotificationScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -34,8 +34,7 @@ const screenOptions = {
 
 const Layout = () => {
   return (
-    <NavigationContainer>
-      <Tab.Navigator 
+      <Tab.Navigator
         screenOptions={screenOptions}>
         <Tab.Screen 
             name="Home" 
@@ -83,7 +82,6 @@ const Layout = () => {
               }}
         />
       </Tab.Navigator>
-    </NavigationContainer>
   )
 }
 
