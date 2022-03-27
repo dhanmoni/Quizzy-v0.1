@@ -1,16 +1,21 @@
-import { View, Text } from 'react-native'
+import { View, Text, Button } from 'react-native'
 import React from 'react'
 
-const HomeScreen = () => {
-  return (
-    <View>
-      <Text style={{fontFamily:'Poppins-SemiBold'}}>HomeScreen</Text>
-      <Text style={{fontFamily:'OpenSans-SemiBold'}}>HomeScreen</Text>
-      <Text style={{fontFamily:'OpenSans-Regular'}}>HomeScreen</Text>
-      <Text style={{fontFamily:'Poppins-Bold'}}>HomeScreen</Text>
-      <Text style={{fontFamily:'Poppins-Regular'}}>HomeScreen</Text>
-    </View>
-  )
-}
+import { connect } from 'react-redux';
 
-export default HomeScreen
+const HomeScreen = (props) => {
+
+    return (
+        <View>
+        
+        <Text style={{fontFamily:'OpenSans-Regular'}}>{props.post.text}</Text>
+        </View>
+    )
+}
+const mapStateToProps = (state) => {
+    return {
+        post: state.post
+      }
+};
+
+export default connect(mapStateToProps)(HomeScreen);
