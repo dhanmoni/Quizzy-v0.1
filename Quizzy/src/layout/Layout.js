@@ -1,15 +1,8 @@
 
-import React, { Component } from 'react'
-import { Text, StyleSheet, View } from 'react-native'
-
+import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/Home/HomeScreen';
-import SearchScreen from '../screens/Search/SearchScreen';
-import PostScreen from '../screens/Post/PostScreen';
-import NotificationScreen from '../screens/Notification/NotificationScreen';
-import ProfileScreen from '../screens/Profile/ProfileScreen';
-
+import * as Screens from '../screens'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
@@ -17,7 +10,7 @@ const Tab = createBottomTabNavigator();
 
 const screenOptions = {
     headerTitle: 'Quizzy',
-    headerTitleAlign:'center',
+    headerTitleAlign:'center', 
     headerStyle:{
         backgroundColor:'#5350d2',
     },
@@ -39,7 +32,7 @@ const Layout = () => {
         screenOptions={screenOptions}>
         <Tab.Screen 
             name="Home" 
-            component={HomeScreen} 
+            component={Screens.HomeScreen} 
             options={{
                 tabBarIcon: ({focused }) => (
                   <Icon name="home" color={ focused? '#5350d2': '#4c5561'} size={26} />
@@ -48,7 +41,7 @@ const Layout = () => {
         />
         <Tab.Screen 
             name="Search" 
-            component={SearchScreen} 
+            component={Screens.SearchScreen} 
             options={{
                 tabBarIcon: ({focused }) => (
                   <Icon name="search" color={ focused? '#5350d2': '#4c5561'} size={25} />
@@ -57,7 +50,7 @@ const Layout = () => {
         />
         <Tab.Screen 
             name="Post" 
-            component={PostScreen} 
+            component={Screens.PostScreen} 
             options={{
                 tabBarIcon: ({focused }) => (
                   <Icon name="plus" color={ focused? '#5350d2': '#4c5561'} size={26} />
@@ -66,7 +59,7 @@ const Layout = () => {
         />
         <Tab.Screen 
             name="Notification" 
-            component={NotificationScreen} 
+            component={Screens.NotificationScreen} 
             options={{
                 tabBarIcon: ({focused }) => (
                 <Icon name="bell" color={ focused? '#5350d2': '#4c5561'} size={24} />
@@ -75,7 +68,7 @@ const Layout = () => {
         />
         <Tab.Screen 
             name="Profile" 
-            component={ProfileScreen}
+            component={Screens.ProfileScreen}
             options={{
                 tabBarIcon: ({focused }) => (
                   <Icon name="user" color={ focused? '#5350d2': '#4c5561'} size={25} />
