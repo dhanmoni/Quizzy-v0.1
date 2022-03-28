@@ -1,12 +1,16 @@
 
 import React from 'react'
+import {connect} from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Screens from '../screens'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 const Tab = createBottomTabNavigator();
+
+const AuthStack = createNativeStackNavigator()
 
 const screenOptions = {
     headerTitle: 'Quizzy',
@@ -25,17 +29,32 @@ const screenOptions = {
     tabBarStyle: { position: 'absolute' },
 }
 
-const Layout = () => {
-  return (
-    <NavigationContainer>
+const Layout = (props) => {
+
+  console.log(props.auth.loggedIn)
+
+  if(props.auth.loggedIn == false) {
+    return (
+
+        <NavigationContainer>
+          <AuthStack.Navigator>
+            <AuthStack.Screen name="Auth" component={Screens.AuthScreen} />
+          </AuthStack.Navigator>
+        </NavigationContainer>
+      )
+  } else {
+
+    
+    return (
+      <NavigationContainer>
       <Tab.Navigator 
         screenOptions={screenOptions}>
         <Tab.Screen 
             name="Home" 
             component={Screens.HomeScreen} 
             options={{
-                tabBarIcon: ({focused }) => (
-                  <Icon name="home" color={ focused? '#5350d2': '#4c5561'} size={26} />
+              tabBarIcon: ({focused }) => (
+                <Icon name="home" color={ focused? '#5350d2': '#4c5561'} size={26} />
                 ),
               }}
         />
@@ -70,14 +89,22 @@ const Layout = () => {
             name="Profile" 
             component={Screens.ProfileScreen}
             options={{
-                tabBarIcon: ({focused }) => (
-                  <Icon name="user" color={ focused? '#5350d2': '#4c5561'} size={25} />
+              tabBarIcon: ({focused }) => (
+                <Icon name="user" color={ focused? '#5350d2': '#4c5561'} size={25} />
                 ),
               }}
-        />
+              />
       </Tab.Navigator>
     </NavigationContainer>
   )
 }
+}
 
-export default Layout
+const mapStateToProps = (state) => {
+  return {
+      auth: state.auth
+    }
+};
+
+
+export default connect(mapStateToProps)(Layout);
