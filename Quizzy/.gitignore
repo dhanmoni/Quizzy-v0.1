@@ -36,7 +36,7 @@ npm-debug.log
 yarn-error.log
 
 # constants
-.env
+src/Firebase/keys.js
 
 # BUCK
 buck-out/
