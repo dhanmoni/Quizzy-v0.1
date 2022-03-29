@@ -33,7 +33,7 @@ const Layout = (props) => {
 
   console.log(props.auth.loggedIn)
 
-  if(props.auth.loggedIn == false) {
+  if(props.auth.loggedIn == true) {
     return (
 
         <NavigationContainer>
