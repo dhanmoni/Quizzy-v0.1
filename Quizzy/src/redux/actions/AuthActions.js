@@ -5,6 +5,7 @@ import {
     GET_CURRENT_USER
 } from './types'
 
+
 export const registerUser = () => dispatch  => {
     console.log("register user called!!")
     // register user by calling firebase api
@@ -13,16 +14,18 @@ export const registerUser = () => dispatch  => {
         //     type: REGISTER_USER,
         //     payload: res
         // })
+    
 }
 
 export const loginUser = () => dispatch  => {
     console.log("login user called!!")
     // login user by calling firebase api
     // dispatch the loginUser action and pass response to get stored in redux
-        dispatch({
-            type: LOGIN_USER,
-            payload: {}
-        })
+    dispatch({
+        type: LOGIN_USER,
+        payload: {}
+    })
+          
 }
 
 export const logoutUser = () => dispatch  => {

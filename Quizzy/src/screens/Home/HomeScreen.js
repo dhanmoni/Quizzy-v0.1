@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux'
 
 import {getPosts} from '../../redux/actions/PostActions'
+import {loginUser, registerUser} from '../../redux/actions/AuthActions'
 
 
 const HomeScreen = (props) => {
@@ -27,6 +28,7 @@ const HomeScreen = (props) => {
                     return (<Text key={p.id}>{p.Question}</Text>);
                 })
             }
+            <Button onPress={props.registerUser} title="Register"/> 
         </View>
     )
 }
@@ -39,6 +41,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => (
     bindActionCreators({
         getPosts,
+        registerUser
     }, dispatch)
 );
   

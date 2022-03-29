@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux'
 
 import {loginUser} from '../../redux/actions/AuthActions'
 
-const AuthScreen = (props) => {
+const AuthScreen = (props) => { 
   return (
     <View>
       <Text>AuthScreen Screen : You are not logged in...</Text>
