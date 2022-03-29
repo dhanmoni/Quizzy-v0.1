@@ -1,4 +1,4 @@
-import {GET_POSTS, ADD_POST, SET_ERROR, SET_LOADING } from '../actions/types'
+import {GET_POSTS, ADD_POST, SET_ERROR, SET_LOADING, REMOVE_LOADING } from '../actions/types'
 const initialState={
     loading:false,
     posts: [],
@@ -24,6 +24,11 @@ export default function(state= initialState, action){
         return {
             ...state,
             loading:true     
+        }
+        case REMOVE_LOADING:
+        return {
+            ...state,
+            loading:false     
         }
 
         case SET_ERROR:

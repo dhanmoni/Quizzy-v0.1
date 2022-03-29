@@ -8,16 +8,23 @@ import {loginUser, registerUser} from '../../redux/actions/AuthActions'
 const AuthScreen = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
 
   //sign in or sign up
-  const [create, setCreate] = useState(false);
+  const [create, setCreate] = useState(true);
 
-  const signIn = () => {props.loginUser(email,password)};
-  const signUp = () => {props.registerUser(email,password)};
+  const signIn = () => {
+      props.loginUser(email,password)
+    };
+  const signUp = () => {
+      props.registerUser(email,password, name)
+    };
 
 
   return (
     <View style={styles.container}>
+    
+      <Text style={styles.titleText}>{create ? "Sign Up" : "Log in"}</Text> 
       <TextInput
       placeholder='Email'
       onChangeText={setEmail}
@@ -30,17 +37,28 @@ const AuthScreen = (props) => {
       value={password}
       style={styles.textInput}
       />
-      {create ? ( 
-      <>
-      <Button onPress={signUp} title="Sign Up" /> 
-      <Text style={styles.text} onPress={() => setCreate(false)}>Sign In</Text>
-      </> 
-      ) : (
-        <>
-      <Button onPress={signIn} title="Login" /> 
-      <Text style={styles.text} onPress={() => setCreate(true)}>Create an Account</Text>
-      </>
-      )}
+      {
+          create ? (
+            <>
+                <TextInput
+                placeholder='Name'
+                onChangeText={setName}
+                value={name}
+                style={styles.textInput}
+                />
+                <Button onPress={signUp} title="Sign Up" /> 
+                <Text style={styles.text} onPress={() => setCreate(false)}>Aleady have an account? Sign In</Text>
+            </>
+          ) : (
+            <>
+                <Button onPress={signIn} title="Login" /> 
+                <Text style={styles.text} onPress={() => setCreate(true)}>Create an Account</Text>
+            </>
+          )
+      }
+      {
+          props.post.loading && <Text style={styles.text}>Loading... Please wait</Text> 
+      }
     </View>
   );
 } /*props.registerUser*/
@@ -62,13 +80,19 @@ const styles = StyleSheet.create({
   text: {
     color: 'blue',
     marginTop: 20,
+  },
+  titleText: {
+      color: '#333',
+      fontSize:26,
+      marginBottom: 20
   }
 
 });
 
 const mapStateToProps = (state) => {
     return {
-        auth: state.auth
+        auth: state.auth,
+        post: state.post
       }
 };
 

@@ -12,7 +12,7 @@ const Tab = createBottomTabNavigator();
 
 const AuthStack = createNativeStackNavigator()
 
-const screenOptions = {
+const tabScreenOptions = {
     headerTitle: 'Quizzy',
     headerTitleAlign:'center', 
     headerStyle:{
@@ -29,15 +29,20 @@ const screenOptions = {
     tabBarStyle: { position: 'absolute' },
 }
 
+const authScreenOptions = {
+  
+  headerShown: false
+}
+
 const Layout = (props) => {
 
   console.log(props.auth.loggedIn)
 
-  if(props.auth.loggedIn == true) {
+  if(props.auth.loggedIn == false) {
     return (
 
         <NavigationContainer>
-          <AuthStack.Navigator>
+          <AuthStack.Navigator screenOptions={authScreenOptions}>
             <AuthStack.Screen name="Auth" component={Screens.AuthScreen} />
           </AuthStack.Navigator>
         </NavigationContainer>
@@ -48,7 +53,7 @@ const Layout = (props) => {
     return (
       <NavigationContainer>
       <Tab.Navigator 
-        screenOptions={screenOptions}>
+        screenOptions={tabScreenOptions}>
         <Tab.Screen 
             name="Home" 
             component={Screens.HomeScreen} 
