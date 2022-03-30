@@ -1,7 +1,7 @@
 
 import React from 'react'
 import {connect} from 'react-redux'
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Screens from '../screens'
@@ -11,6 +11,14 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const Tab = createBottomTabNavigator();
 
 const AuthStack = createNativeStackNavigator()
+
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: '#fff'
+  },
+};
 
 const tabScreenOptions = {
     headerTitle: 'Quizzy',
@@ -26,7 +34,8 @@ const tabScreenOptions = {
     tabBarShowLabel: false,
     tabBarActiveTintColor: '#5350d2',
     tabBarInactiveTintColor: 'gray',
-    tabBarStyle: { position: 'absolute' },
+    tabBarHideOnKeyboard: true
+    
 }
 
 const authScreenOptions = {
@@ -41,7 +50,7 @@ const Layout = (props) => {
   if(props.auth.loggedIn == false) {
     return (
 
-        <NavigationContainer>
+        <NavigationContainer theme={MyTheme}>
           <AuthStack.Navigator screenOptions={authScreenOptions}>
             <AuthStack.Screen name="Auth" component={Screens.AuthScreen} />
           </AuthStack.Navigator>
@@ -51,7 +60,7 @@ const Layout = (props) => {
 
     
     return (
-      <NavigationContainer>
+      <NavigationContainer theme={MyTheme}>
       <Tab.Navigator 
         screenOptions={tabScreenOptions}>
         <Tab.Screen 
