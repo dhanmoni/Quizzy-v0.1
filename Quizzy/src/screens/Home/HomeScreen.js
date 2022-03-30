@@ -1,10 +1,10 @@
-import { View, Text, Button } from 'react-native'
+import { View, Text, Button, ScrollView } from 'react-native'
 import React, {useEffect} from 'react'
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux'
-
 import {getPosts} from '../../redux/actions/PostActions'
 import {loginUser, registerUser, logoutUser} from '../../redux/actions/AuthActions'
+import PostCard from '../../components/PostCard';
 
 
 const HomeScreen = (props) => {
@@ -22,14 +22,15 @@ const HomeScreen = (props) => {
     }
     // just printing the questions
     return (
-        <View>
+        <ScrollView>
              {
-                props.post.posts.map((p) => {
-                    return (<Text key={p.id}>{p.Question}</Text>);
+                props.post.posts.map((post) => {
+                    console.log(post)
+                    return (<PostCard post={post} key={post.id}/>);
                 })
             }
-            <Button onPress={props.logoutUser} title="Logout"/> 
-        </View>
+            {/* <Button onPress={props.logoutUser} title="Logout"/>  */}
+        </ScrollView>
     )
 }
 const mapStateToProps = (state) => {

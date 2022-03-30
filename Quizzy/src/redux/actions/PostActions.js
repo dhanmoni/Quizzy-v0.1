@@ -25,7 +25,7 @@ export const getPosts = () => dispatch  => {
             snapshot.docs.forEach(doc=> {
                 console.log(doc.data())
                 console.log(doc.data().Author.id)
-                posts.push({...doc.data(), Author: doc.data().Author.id, id: doc.id})
+                posts.push({...doc.data(), id: doc.id})
             })
         })
         .then(()=>
@@ -59,7 +59,8 @@ export const addPost = (postData) => dispatch  => {
         Question: postData.Question,
         Options: postData.Options,
         Answer: postData.Answer,
-        Author: postData.Author
+        Author: postData.Author,
+        AuthorName: postData.AuthorName
     })
         .then(()=>
             dispatch({
