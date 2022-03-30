@@ -54,7 +54,8 @@ const PostScreen = (props) => {
       Question: question,
       Options: optionsArr,
       Answer: correctOption,
-      Author: props.auth.currentUser.id
+      Author: props.auth.currentUser.id,
+      AuthorName: props.auth.currentUser.name
     }
     console.log(data)
     await props.addPost(data)
