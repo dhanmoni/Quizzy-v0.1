@@ -1,5 +1,5 @@
 import { auth, firestoreDB } from '../../Firebase/firebaseConfig'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { doc, setDoc, getDoc } from 'firebase/firestore'
 import { 
     REGISTER_USER,
@@ -103,20 +103,15 @@ export const loginUser = (email,password) => dispatch  => {
 export const logoutUser = () => dispatch  => {
     // logout user by calling firebase api
     // dispatch the logoutUser action and pass response to get stored in redux
-        dispatch({
-            type: LOG_OUT_USER
-        })
+    signOut(auth)
+        .then(() => 
+        dispatch({type: LOG_OUT_USER}))
+            .catch((error) => {
+                console.log(error)
+                dispatch({type: SET_ERROR})
+    });
+        
        
 }
 
-export const getCurrentUser = () => dispatch  => {
-    console.log("get current user called!!")
-    // get current user by calling firebase api
-    // dispatch the getCurrentUser action and pass response to get stored in redux
-        // dispatch({
-        //     type: GET_CURRENT_USER,
-        //     payload: res
-        // })
-         
-}
 

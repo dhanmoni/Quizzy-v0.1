@@ -1,12 +1,29 @@
-import { View, Text } from 'react-native'
 import React from 'react'
+import {  Button, ScrollView  } from 'react-native'
+import { connect } from 'react-redux'
+import { logoutUser } from '../../redux/actions/AuthActions'
+import {bindActionCreators} from 'redux'
+import UserCard from '../../components/UserCard'
 
-const ProfileScreen = () => {
+export const ProfileScreen = (props) => {
   return (
-    <View>
-      <Text>ProfileScreen</Text>
-    </View>
+    <ScrollView>
+     <UserCard/>
+   <Button onPress={props.logoutUser} title= "Sign Out"></Button>
+</ScrollView>
+      
   )
 }
 
-export default ProfileScreen
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  post: state.post
+})
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    logoutUser
+}, dispatch)
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen)
