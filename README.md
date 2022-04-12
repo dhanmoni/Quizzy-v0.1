@@ -28,7 +28,7 @@ It will install the required dependencies for the project.
 
 Quizzy🧠✍ is a community based platform that lets you learn more about a topic or a subject by testing your knowledge with an MCQ based quiz that is created by other members of the Quizzy community. You can earn special reward points by giving the correct answer to a quiz that is known as Quizzy Coins. You can later redeem the coins earned with some exciting coupons or items available. A Quiz can be created by anyone using the application and you can follow other members of the community to connect and learn from peers. 
 
-Quizzy Community is under build process🔨🛠. If you wish to contribute to build a community of excellence clone this repository and follow the [Installation](https://github.com/dhanmoni/Quizzy-v0.1/new/main?readme=1#installation steps.
+Quizzy Community is under build process🔨🛠. If you wish to contribute to build a community of excellence clone this repository and follow the [Installation](https://github.com/dhanmoni/Quizzy-v0.1/new/main?readme=1#installation) steps.
 
 ### Landing Page
 
