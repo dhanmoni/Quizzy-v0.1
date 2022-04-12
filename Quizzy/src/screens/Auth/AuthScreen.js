@@ -1,4 +1,4 @@
-import { View, Text, Button, StyleSheet, TextInput} from 'react-native'
+import { View, Text, Button, StyleSheet, TextInput, Image} from 'react-native'
 import React,{useState} from 'react'
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux'
@@ -23,6 +23,7 @@ const AuthScreen = (props) => {
 
   return (
     <View style={styles.container}>
+      <Image source={require('../../../assets/images/icon.png')} style={styles.icon}/>
     
       <Text style={styles.titleText}>{create ? "Sign Up" : "Log in"}</Text> 
       <TextInput
@@ -36,6 +37,7 @@ const AuthScreen = (props) => {
       onChangeText={setPassword}
       value={password}
       style={styles.textInput}
+      secureTextEntry={true}
       />
       {
           create ? (
@@ -69,9 +71,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
     padding: 20,
+    marginBottom: 40,
+    alignItems: 'center'
   },
   textInput: {
     borderWidth: 1,
+    width: '95%',
     borderColor: 'grey',
     padding: 10,
     marginBottom: 20,
@@ -85,6 +90,12 @@ const styles = StyleSheet.create({
       color: '#333',
       fontSize:26,
       marginBottom: 20
+  },
+  icon: {
+     width: 120,
+     height: 120,
+     marginBottom: 40,
+     
   }
 
 });
