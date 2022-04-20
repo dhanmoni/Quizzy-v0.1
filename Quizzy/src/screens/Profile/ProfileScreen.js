@@ -1,8 +1,8 @@
-import React,  { Component, PropTypes }  from 'react'
+import React, { Component, PropTypes } from 'react'
 import { Text, ScrollView, View, StyleSheet, TouchableOpacity, UIManager, findNodeHandle, } from 'react-native'
 import { connect } from 'react-redux'
 import { logoutUser } from '../../redux/actions/AuthActions'
-import {bindActionCreators} from 'redux'
+import { bindActionCreators } from 'redux'
 import UserCard from '../../components/UserCard'
 import { MenuProvider } from 'react-native-popup-menu';
 
@@ -10,19 +10,10 @@ export const ProfileScreen = (props) => {
   return (
     <ScrollView>
       <MenuProvider>
-      <UserCard/>
+        <UserCard />
       </MenuProvider>
-     
-     <View style={styles.container}>
-          <TouchableOpacity
-              style={styles.button}
-              onPress={props.logoutUser}
-            >
-              <Text style={styles.logOutButtonText}>Log Out</Text>
-            </TouchableOpacity>
-          </View>
-</ScrollView>
-      
+    </ScrollView>
+
   )
 }
 
@@ -36,11 +27,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#5350d2",
     padding: 10,
-    marginTop:20,
-    borderRadius:12
+    marginTop: 20,
+    borderRadius: 12
   },
-  logOutButtonText:{
-    color:'#fff',
+  logOutButtonText: {
+    color: '#fff',
   }
 
 })
@@ -53,7 +44,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     logoutUser
-}, dispatch)
+  }, dispatch)
 )
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen)
