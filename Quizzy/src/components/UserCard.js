@@ -3,12 +3,66 @@ import React, { useState } from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
+import { logoutUser } from '../redux/actions/AuthActions';
+import Icons from 'react-native-vector-icons/MaterialIcons'
+import {
+    Menu,
+    MenuOptions,
+    MenuOption,
+    MenuTrigger,
+} from 'react-native-popup-menu';
+import { Divider } from 'react-native-paper';
 
 const UserCard = (props) => {
-
-
+    const onpress = () => {
+        props.logoutUser
+    }
     return (
         <View style={styles.userCard}>
+
+            <Menu style={{ alignItems: 'flex-end'}}>
+                <MenuTrigger>
+                    <Icons
+                        name='more-vert'
+                        size={40}
+                        color={'grey'}
+                        style={{ textAlign: 'right' }} />
+                </MenuTrigger>
+                <MenuOptions>
+                    <MenuOption>
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={null}
+                        >
+                            <Text style={styles.logOutButtonText}>Edit Profile</Text>
+                        </TouchableOpacity>
+                    </MenuOption>
+                    <MenuOption>
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={null}
+                        >
+                            <Text style={styles.logOutButtonText}>App Settings</Text>
+                        </TouchableOpacity>
+                    </MenuOption>
+                    <MenuOption>
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={null}
+                        >
+                            <Text style={styles.logOutButtonText}>About</Text>
+                        </TouchableOpacity>
+                    </MenuOption>
+                    <MenuOption>
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={props.logoutUser}
+                        >
+                            <Text style={styles.logOutButtonText}>Log Out</Text>
+                        </TouchableOpacity>
+                    </MenuOption>
+                </MenuOptions>
+            </Menu>
             <View style={styles.userHeader}>
                 <Icon name="user" color={'#5350d2'} size={120} />
                 <Text style={styles.userName}>{props.auth.currentUser.name}</Text>
@@ -38,15 +92,17 @@ const UserCard = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        auth: state.auth
+        auth: state.auth,
+        post: state.post
     }
 };
 
 const mapDispatchToProps = dispatch => (
-    bindActionCreators({}, dispatch)
+    bindActionCreators({
+        logoutUser
+    }, dispatch)
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserCard);
 const styles = StyleSheet.create({
     userCard: {
         padding: 10,
@@ -76,5 +132,23 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 14,
+    },
+    container: {
+        padding: 5,
+        alignItems: 'center'
+    },
+    button: {
+        width: "100%",
+        alignItems: "center",
+        padding: 10,
+        borderRadius:12
+        
+    },
+    logOutButtonText: {
+        color: '#333',
+        fontFamily: 'OpenSans-Regular',
+        fontSize: 16,
     }
 })
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserCard);

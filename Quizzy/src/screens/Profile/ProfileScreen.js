@@ -1,14 +1,18 @@
-import React from 'react'
-import { Text, ScrollView, View, StyleSheet, TouchableOpacity } from 'react-native'
+import React,  { Component, PropTypes }  from 'react'
+import { Text, ScrollView, View, StyleSheet, TouchableOpacity, UIManager, findNodeHandle, } from 'react-native'
 import { connect } from 'react-redux'
 import { logoutUser } from '../../redux/actions/AuthActions'
 import {bindActionCreators} from 'redux'
 import UserCard from '../../components/UserCard'
+import { MenuProvider } from 'react-native-popup-menu';
 
 export const ProfileScreen = (props) => {
   return (
     <ScrollView>
-     <UserCard/>
+      <MenuProvider>
+      <UserCard/>
+      </MenuProvider>
+     
      <View style={styles.container}>
           <TouchableOpacity
               style={styles.button}
