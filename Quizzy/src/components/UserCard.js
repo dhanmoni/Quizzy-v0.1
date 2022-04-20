@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native'
+import React from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
@@ -11,12 +11,8 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
-import { Divider } from 'react-native-paper';
 
 const UserCard = (props) => {
-    const onpress = () => {
-        props.logoutUser
-    }
     return (
         <View style={styles.userCard}>
 
@@ -85,7 +81,6 @@ const UserCard = (props) => {
                     <Text style={styles.numbers}>2000</Text>
                 </View>
             </View>
-
         </View>
     )
 }
