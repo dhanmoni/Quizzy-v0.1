@@ -2,12 +2,13 @@ import {
     GET_POSTS,
     ADD_POST,
     SET_LOADING,
-    SET_ERROR
+    SET_ERROR,
+    GET_PROFILE_POSTS
 } from './types'
 
-import { firestoreDB} from '../../Firebase/firebaseConfig'
+import { firestoreDB,auth} from '../../Firebase/firebaseConfig'
 
-import { addDoc, collection, getDocs, getFirestore } from 'firebase/firestore'
+import { addDoc, collection, getDocs, getFirestore, query, where} from 'firebase/firestore'
 
 export const getPosts = () => dispatch  => {
     // initially set the loading step to true, so that a loader can be shown
@@ -75,3 +76,37 @@ export const addPost = (postData) => dispatch  => {
         })
 }
 
+
+export const getProfilePosts = () => dispatch  => {
+    // initially set the loading step to true, so that a loader can be shown
+    dispatch({
+        type: SET_LOADING
+    })
+    console.log("get post called!!")
+    // call firebase api and retrieve posts
+    // dispatch the getPost action and pass response to get stored in redux
+    const uid = auth.currentUser.uid
+    const colRef = query(collection(firestoreDB, 'Posts'), where("Author", "==", uid));
+
+    let postss = []
+    getDocs(colRef)
+        .then(snapshot => {
+            snapshot.docs.forEach(doc=> {
+                console.log(doc.data())
+                console.log(doc.data().Author.id)
+                postss.push({...doc.data(), id: doc.id})
+            })
+        })
+        .then(()=>
+            dispatch({
+                type: GET_PROFILE_POSTS,
+                payload: postss
+            }
+            )
+        )
+        .catch(()=> {
+            dispatch({
+                type: SET_ERROR
+            })
+        })
+}
