@@ -1,4 +1,4 @@
-import {GET_POSTS, ADD_POST, SET_ERROR, SET_LOADING, REMOVE_LOADING } from '../actions/types'
+import {GET_POSTS, ADD_POST, SET_ERROR, SET_LOADING, REMOVE_LOADING, GET_PROFILE_POSTS } from '../actions/types'
 const initialState={
     loading:false,
     posts: [],
@@ -11,6 +11,13 @@ export default function(state= initialState, action){
         return{
             ...state,
             posts: action.payload,
+            loading:false
+        }
+
+        case GET_PROFILE_POSTS: 
+        return{
+            ...state,
+            postss: action.payload,
             loading:false
         }
 

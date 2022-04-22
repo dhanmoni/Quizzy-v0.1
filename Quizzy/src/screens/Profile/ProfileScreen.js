@@ -5,13 +5,12 @@ import { logoutUser } from '../../redux/actions/AuthActions'
 import { bindActionCreators } from 'redux'
 import UserCard from '../../components/UserCard'
 import { MenuProvider } from 'react-native-popup-menu';
-import { getPosts } from '../../redux/actions/PostActions'
-import PostCard from '../../components/PostCard'
+import { getProfilePosts } from '../../redux/actions/PostActions'
 import ProfilePostCard from '../../components/ProfilePostCard'
 
 export const ProfileScreen = (props) => {
   useEffect(() => {
-    props.getPosts()
+    props.getProfilePosts()
 }, [])
 
 if(props.post.loading){
@@ -30,12 +29,11 @@ if(props.post.loading){
       <Text style={styles.Text}>My Posts: </Text>
       <ScrollView>
              {
-                props.post.posts.map((post) => {
+                props.post.postss.map((post) => {
                     console.log(post)
-                    return (<ProfilePostCard post={post} key={post.id}/>);
+                    return (<ProfilePostCard post={post}/>);
                 })
             }
-            {/* <Button onPress={props.logoutUser} title="Logout"/>  */}
         </ScrollView>
     </ScrollView>
 
@@ -63,14 +61,16 @@ const styles = StyleSheet.create({
 
 })
 
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-  post: state.post
-})
+const mapStateToProps = (state) => {
+  return {
+      auth: state.auth,
+      post: state.post
+  }
+};
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
-    getPosts,
+    getProfilePosts,
     logoutUser
   }, dispatch)
 )

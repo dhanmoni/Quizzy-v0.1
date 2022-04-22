@@ -1,6 +1,7 @@
 
 // types related to post/question/quiz
 export const GET_POSTS = 'GET_POSTS';
+export const GET_PROFILE_POSTS = 'GET_PROFILE_POSTS';
 export const ADD_POST = 'ADD_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const SET_LOADING = 'SET_LOADING';
