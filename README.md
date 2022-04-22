@@ -50,7 +50,8 @@ Quizzy Community is under build process🔨🛠. If you wish to contribute to bu
 
 ### Profile Page
 
-<img src = "https://user-images.githubusercontent.com/46704901/162923445-4dd3b4ab-ea62-40d4-9ff9-7b3821595ae7.png" width="500">
+<img src = "https://user-images.githubusercontent.com/46704901/164310854-5d21495c-04d3-43bb-be31-e679e245d20a.png" width="500">
+
 
 
 ### Here is a list of features that we are providing:
