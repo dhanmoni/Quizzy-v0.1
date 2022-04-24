@@ -15,7 +15,7 @@ const ProfilePostCard = ({ post }) => {
                     <Text style={styles.userName}>{post.AuthorName}</Text>
                 </View>
                 <View style={styles.icon}>
-                    <TouchableOpacity onPress={deletePosts(post)}>
+                    <TouchableOpacity onPress={()=> deletePosts(post)}>
                         <Icons name="delete" color={'#FF0000'} size={20} style={styles.icon}> Delete Post</Icons>
                     </TouchableOpacity>
                 </View>
