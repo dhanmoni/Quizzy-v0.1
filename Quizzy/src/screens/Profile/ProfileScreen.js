@@ -20,7 +20,7 @@ export const ProfileScreen = (props) => {
       {
         props.post.loading && (
           <View style= {styles.container}>
-            <Text style={{ fontFamily: 'OpenSans-Regular' }}>Posting... Please wait</Text>
+            <Text style={{ fontFamily: 'OpenSans-Regular' }}>Fetching... Please wait</Text>
           </View>
         )
       }
