@@ -15,9 +15,9 @@ export const ProfileScreen = (props) => {
   const [refreshing, setRefreshing] = React.useState(false);
 
   const onRefresh = React.useCallback(() => {
-    props.getProfilePosts() 
+    props.getProfilePosts()
     setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
+    wait(500).then(() => setRefreshing(false));
   }, []);
 
   useEffect(() => {
@@ -34,13 +34,6 @@ export const ProfileScreen = (props) => {
         <UserCard />
       </MenuProvider>
       <Text style={styles.Text}>My Posts: </Text>
-      {
-        props.post.loading && (
-          <View style= {styles.container}>
-            <Text style={{ fontFamily: 'OpenSans-Regular' }}>Fetching... Please wait</Text>
-          </View>
-        )
-      }
       <ScrollView>
         {
           props.post.postss.map((post) => {

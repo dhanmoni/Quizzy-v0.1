@@ -17,21 +17,13 @@ const HomeScreen = (props) => {
   const onRefresh = React.useCallback(() => {
     props.getPosts() 
     setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
+    wait(500).then(() => setRefreshing(false));
   }, []);
-
 
     useEffect(() => {
         props.getPosts()
     }, [])
 
-    if(props.post.loading){
-        return (
-            <View>
-        <Text style={{fontFamily:'OpenSans-Regular'}}>Loading...</Text>
-        </View>
-        )
-    }
     // just printing the questions
     return (
         <ScrollView refreshControl={
