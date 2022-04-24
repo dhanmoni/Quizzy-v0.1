@@ -91,11 +91,12 @@ const styles = StyleSheet.create({
         color: '#333',
         fontFamily:'OpenSans-Regular'
     },
-    option:{
+    optionText:{
         borderWidth: 1,
         borderRadius:12,
         marginTop: 6,
-        padding:6
+        padding:6,
+        color: 'grey'
     },
     incorrect:{
         color:'red',

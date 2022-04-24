@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Text, ScrollView, View, StyleSheet } from 'react-native'
+import { Text, ScrollView, View, StyleSheet, RefreshControl } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import UserCard from '../../components/UserCard'
@@ -7,12 +7,29 @@ import { MenuProvider } from 'react-native-popup-menu';
 import { getProfilePosts } from '../../redux/actions/PostActions'
 import ProfilePostCard from '../../components/ProfilePostCard'
 
+const wait = (timeout) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+}
+
 export const ProfileScreen = (props) => {
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    props.getProfilePosts() 
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+
   useEffect(() => {
     props.getProfilePosts()
   }, [])
   return (
-    <ScrollView>
+    <ScrollView refreshControl={
+      <RefreshControl
+        refreshing={refreshing}
+        onRefresh={onRefresh}
+      />
+    }>
       <MenuProvider>
         <UserCard />
       </MenuProvider>

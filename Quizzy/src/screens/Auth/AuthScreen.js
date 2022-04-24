@@ -31,6 +31,7 @@ const AuthScreen = (props) => {
       onChangeText={setEmail}
       value={email}
       style={styles.textInput}
+      placeholderTextColor={'grey'}
       />
        <TextInput
       placeholder='Password'
@@ -38,6 +39,7 @@ const AuthScreen = (props) => {
       value={password}
       style={styles.textInput}
       secureTextEntry={true}
+      placeholderTextColor={'grey'}
       />
       {
           create ? (
@@ -47,6 +49,7 @@ const AuthScreen = (props) => {
                 onChangeText={setName}
                 value={name}
                 style={styles.textInput}
+                placeholderTextColor={'grey'}
                 />
                 <Button onPress={signUp} title="Sign Up" /> 
                 <Text style={styles.text} onPress={() => setCreate(false)}>Aleady have an account? Sign In</Text>
@@ -81,6 +84,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 20,
     borderRadius: 5,
+    color: '#333'
   },
   text: {
     color: 'blue',

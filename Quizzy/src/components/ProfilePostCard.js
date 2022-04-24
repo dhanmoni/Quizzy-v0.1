@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     postBody: {
-        marginTop: 10
+        marginTop: 10,
     },
     question: {
         fontSize: 20,
@@ -78,11 +78,12 @@ const styles = StyleSheet.create({
         fontFamily: 'OpenSans-Regular',
         fontWeight: 'bold'
     },
-    option: {
+    optionText: {
         borderWidth: 1,
         borderRadius: 12,
         marginTop: 6,
-        padding: 6
+        padding: 6,
+        color: 'grey'
     },
     incorrect: {
         color: 'red',
@@ -95,5 +96,6 @@ const styles = StyleSheet.create({
     },
     icon: {
         padding: 4,
+        fontSize: 18,
     }
 })
