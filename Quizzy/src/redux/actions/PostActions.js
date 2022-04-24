@@ -3,12 +3,13 @@ import {
     ADD_POST,
     SET_LOADING,
     SET_ERROR,
-    GET_PROFILE_POSTS
+    GET_PROFILE_POSTS,
+    DELETE_POST
 } from './types'
 
 import { firestoreDB,auth} from '../../Firebase/firebaseConfig'
 
-import { addDoc, collection, getDocs, getFirestore, query, where} from 'firebase/firestore'
+import { addDoc, collection, getDocs, query, where, deleteDoc, doc} from 'firebase/firestore'
 
 export const getPosts = () => dispatch  => {
     // initially set the loading step to true, so that a loader can be shown
@@ -110,3 +111,9 @@ export const getProfilePosts = () => dispatch  => {
             })
         })
 }
+
+export const deletePosts = (post)  => {
+  
+   deleteDoc(doc(firestoreDB, "Posts", post.id))
+
+  }

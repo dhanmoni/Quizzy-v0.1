@@ -1,4 +1,4 @@
-import {GET_POSTS, ADD_POST, SET_ERROR, SET_LOADING, REMOVE_LOADING, GET_PROFILE_POSTS } from '../actions/types'
+import {GET_POSTS, ADD_POST, SET_ERROR, SET_LOADING, REMOVE_LOADING, GET_PROFILE_POSTS, DELETE_POST} from '../actions/types'
 const initialState={
     loading:false,
     posts: [],

@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Icons from 'react-native-vector-icons/AntDesign';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
+import { deletePosts} from '../redux/actions/PostActions';
 
 const ProfilePostCard = ({ post }) => {
     return (
@@ -14,7 +15,7 @@ const ProfilePostCard = ({ post }) => {
                     <Text style={styles.userName}>{post.AuthorName}</Text>
                 </View>
                 <View style={styles.icon}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={deletePosts(post)}>
                         <Icons name="delete" color={'#FF0000'} size={20} style={styles.icon}> Delete Post</Icons>
                     </TouchableOpacity>
                 </View>
@@ -37,7 +38,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => (
-    bindActionCreators({}, dispatch)
+    bindActionCreators({
+        deletePosts,
+    }, dispatch)
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePostCard);
