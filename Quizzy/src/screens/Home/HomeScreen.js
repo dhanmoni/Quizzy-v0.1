@@ -2,8 +2,7 @@ import { View, Text, Button, ScrollView, RefreshControl } from 'react-native'
 import React, {useEffect} from 'react'
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux'
-import {getPosts} from '../../redux/actions/PostActions'
-import {loginUser, registerUser, logoutUser} from '../../redux/actions/AuthActions'
+import {deletePosts, getPosts} from '../../redux/actions/PostActions'
 import PostCard from '../../components/PostCard';
 
 const wait = (timeout) => {
@@ -21,6 +20,7 @@ const HomeScreen = (props) => {
   }, []);
 
     useEffect(() => {
+      console.log('hello')
         props.getPosts()
     }, [])
 
@@ -51,8 +51,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => (
     bindActionCreators({
         getPosts,
-        registerUser,
-        logoutUser
     }, dispatch)
 );
   

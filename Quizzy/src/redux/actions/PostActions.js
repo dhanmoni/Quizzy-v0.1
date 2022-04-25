@@ -1,4 +1,4 @@
-import { 
+import {
     GET_POSTS,
     ADD_POST,
     SET_LOADING,
@@ -7,11 +7,11 @@ import {
     DELETE_POST
 } from './types'
 
-import { firestoreDB,auth} from '../../Firebase/firebaseConfig'
+import { firestoreDB, auth } from '../../Firebase/firebaseConfig'
 
-import { addDoc, collection, getDocs, query, where, deleteDoc, doc} from 'firebase/firestore'
+import { addDoc, collection, getDocs, query, where, deleteDoc, doc } from 'firebase/firestore'
 
-export const getPosts = () => dispatch  => {
+export const getPosts = () => dispatch => {
     // initially set the loading step to true, so that a loader can be shown
     dispatch({
         type: SET_LOADING
@@ -24,27 +24,27 @@ export const getPosts = () => dispatch  => {
     let posts = []
     getDocs(colRef)
         .then(snapshot => {
-            snapshot.docs.forEach(doc=> {
+            snapshot.docs.forEach(doc => {
                 console.log(doc.data())
                 console.log(doc.data().Author.id)
-                posts.push({...doc.data(), id: doc.id})
+                posts.push({ ...doc.data(), id: doc.id })
             })
         })
-        .then(()=>
+        .then(() =>
             dispatch({
                 type: GET_POSTS,
                 payload: posts
             }
             )
         )
-        .catch(()=> {
+        .catch(() => {
             dispatch({
                 type: SET_ERROR
             })
         })
 }
 
-export const addPost = (postData) => dispatch  => {
+export const addPost = (postData) => dispatch => {
     console.log("add post called!!")
     // call firebase api and add post
     // dispatch the addPost action and pass response to get stored in redux
@@ -64,13 +64,13 @@ export const addPost = (postData) => dispatch  => {
         Author: postData.Author,
         AuthorName: postData.AuthorName
     })
-        .then(()=>
+        .then(() =>
             dispatch({
                 type: ADD_POST
             }
             )
         )
-        .catch(()=> {
+        .catch(() => {
             dispatch({
                 type: SET_ERROR
             })
@@ -78,42 +78,13 @@ export const addPost = (postData) => dispatch  => {
 }
 
 
-export const getProfilePosts = () => dispatch  => {
-    // initially set the loading step to true, so that a loader can be shown
-    dispatch({
-        type: SET_LOADING
-    })
-    console.log("get post called!!")
-    // call firebase api and retrieve posts
-    // dispatch the getPost action and pass response to get stored in redux
-    const uid = auth.currentUser.uid
-    const colRef = query(collection(firestoreDB, 'Posts'), where("Author", "==", uid));
+export const deletePosts = (post) => dispatch => {
+    console.log('deleting', post)
+    deleteDoc(doc(firestoreDB, "Posts", post.id)).then(()=> {
 
-    let postss = []
-    getDocs(colRef)
-        .then(snapshot => {
-            snapshot.docs.forEach(doc=> {
-                console.log(doc.data())
-                console.log(doc.data().Author.id)
-                postss.push({...doc.data(), id: doc.id})
-            })
+        dispatch({
+            type: DELETE_POST,
+            payload: post.id
         })
-        .then(()=>
-            dispatch({
-                type: GET_PROFILE_POSTS,
-                payload: postss
-            }
-            )
-        )
-        .catch(()=> {
-            dispatch({
-                type: SET_ERROR
-            })
-        })
+    }).catch(err=> console.log(err))
 }
-
-export const deletePosts = (post)  => {
-  
-   deleteDoc(doc(firestoreDB, "Posts", post.id))
-
-  }

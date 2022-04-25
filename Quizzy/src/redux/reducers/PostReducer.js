@@ -14,10 +14,10 @@ export default function(state= initialState, action){
             loading:false
         }
 
-        case GET_PROFILE_POSTS: 
+        case DELETE_POST: 
         return{
             ...state,
-            postss: action.payload,
+            posts: state.posts.filter(post=> post.Author != action.payload),
             loading:false
         }
 

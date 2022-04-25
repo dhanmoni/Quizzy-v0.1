@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import UserCard from '../../components/UserCard'
 import { MenuProvider } from 'react-native-popup-menu';
-import { getProfilePosts } from '../../redux/actions/PostActions'
+import { getPosts } from '../../redux/actions/PostActions'
 import ProfilePostCard from '../../components/ProfilePostCard'
 
 const wait = (timeout) => {
@@ -15,13 +15,13 @@ export const ProfileScreen = (props) => {
   const [refreshing, setRefreshing] = React.useState(false);
 
   const onRefresh = React.useCallback(() => {
-    props.getProfilePosts()
+    props.getPosts()
     setRefreshing(true);
     wait(500).then(() => setRefreshing(false));
   }, []);
 
   useEffect(() => {
-    props.getProfilePosts()
+    props.getPosts()
   }, [])
   return (
     <ScrollView refreshControl={
@@ -36,9 +36,12 @@ export const ProfileScreen = (props) => {
       <Text style={styles.Text}>My Posts: </Text>
       <ScrollView>
         {
-          props.post.postss.map((post) => {
-            console.log(post)
-            return (<ProfilePostCard post={post} key={post.id} />);
+          props.post.posts.map((post) => {
+            if(post.Author == props.auth.currentUser.id){
+              console.log()
+              console.log({post})
+              return (<ProfilePostCard post={post} key={post.id} />);
+            }
           })
         }
       </ScrollView>
@@ -77,7 +80,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
-    getProfilePosts
+    getPosts
   }, dispatch)
 )
 
