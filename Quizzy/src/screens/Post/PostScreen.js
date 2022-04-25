@@ -89,6 +89,7 @@ const PostScreen = (props) => {
                 onChangeText={setQuestion}
                 value={question}
                 placeholder="Your Question"
+                placeholderTextColor={'grey'}
                 />
             </View>
             <View style= {styles.optionContainer}>
@@ -99,14 +100,16 @@ const PostScreen = (props) => {
                       onChangeText={setOptionOne}
                       value={optionOne}
                       placeholder="Option 1" 
-                      style={styles.leftOptions} />
+                      style={styles.leftOptions}
+                      placeholderTextColor={'grey'} />
                   </View>
                   <View style={{flex:1}}>
                       <TextInput 
                       onChangeText={setOptionTwo}
                       value={optionTwo}
                       placeholder="Option 2" 
-                      style={styles.rightOptions} />
+                      style={styles.rightOptions}
+                      placeholderTextColor={'grey'} />
                   </View>
               </View>
               <View style={{flexDirection:"row"}}>
@@ -115,14 +118,16 @@ const PostScreen = (props) => {
                       onChangeText={setOptionThree}
                       value={optionThree}
                       placeholder="Option 3" 
-                      style={styles.leftOptions} />
+                      style={styles.leftOptions}
+                      placeholderTextColor={'grey'} />
                   </View>
                   <View style={{flex:1}}>
                       <TextInput 
                       onChangeText={setOptionFour}
                       value={optionFour}
                       placeholder="Option 4" 
-                      style={styles.rightOptions} />
+                      style={styles.rightOptions}
+                      placeholderTextColor={'grey'} />
                   </View>
               </View>
             </View>
@@ -130,7 +135,7 @@ const PostScreen = (props) => {
             <Text style={styles.postText}>Choose the correct option:</Text>
             <Picker
               selectedValue={correctOption}
-              style={{ height: 50, width: 150 }}
+              style={{ height: 50, width: 150, color: 'grey' }}
               onValueChange={(itemValue, itemIndex) => setCorrectOption(itemValue)}
             >
               <Picker.Item label="Option 1" value={optionOne} />
@@ -177,10 +182,12 @@ const styles = StyleSheet.create({
   },
   postText: {
     fontSize: 18,
-    fontFamily:'OpenSans-Regular'
+    marginTop: 20,
+    fontFamily:'OpenSans-Regular',
+    color: '#333',
   },
   postContainer: {
-    marginTop:20
+    marginTop:2
   },
   input: {
     height: 40,
@@ -188,7 +195,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     padding: 10,
-    backgroundColor: '#f5f5f5',
+    color: '#333',
     fontFamily:'OpenSans-Regular'
   },
   leftOptions: {
@@ -198,7 +205,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     padding: 10,
-    backgroundColor: '#f5f5f5',
+    color: '#333',
     fontFamily:'OpenSans-Regular'
   },
   rightOptions:{
@@ -208,7 +215,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     padding: 10,
-    backgroundColor: '#f5f5f5',
+    color: '#333',
     fontFamily:'OpenSans-Regular'
   },
   button: {

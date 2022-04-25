@@ -1,28 +1,37 @@
-import { View, Text, Button, ScrollView } from 'react-native'
+import { View, Text, Button, ScrollView, RefreshControl } from 'react-native'
 import React, {useEffect} from 'react'
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux'
-import {getPosts} from '../../redux/actions/PostActions'
-import {loginUser, registerUser, logoutUser} from '../../redux/actions/AuthActions'
+import {deletePosts, getPosts} from '../../redux/actions/PostActions'
 import PostCard from '../../components/PostCard';
 
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
 
 const HomeScreen = (props) => {
 
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    props.getPosts() 
+    setRefreshing(true);
+    wait(500).then(() => setRefreshing(false));
+  }, []);
+
     useEffect(() => {
+      console.log('hello')
         props.getPosts()
     }, [])
 
-    if(props.post.loading){
-        return (
-            <View>
-        <Text style={{fontFamily:'OpenSans-Regular'}}>Loading...</Text>
-        </View>
-        )
-    }
     // just printing the questions
     return (
-        <ScrollView>
+        <ScrollView refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+            />
+          }>
              {
                 props.post.posts.map((post) => {
                     console.log(post)
@@ -42,8 +51,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => (
     bindActionCreators({
         getPosts,
-        registerUser,
-        logoutUser
     }, dispatch)
 );
   

@@ -1,40 +1,50 @@
 import React, { useEffect } from 'react'
-import { Text, ScrollView, View, StyleSheet} from 'react-native'
+import { Text, ScrollView, View, StyleSheet, RefreshControl } from 'react-native'
 import { connect } from 'react-redux'
-import { logoutUser } from '../../redux/actions/AuthActions'
 import { bindActionCreators } from 'redux'
 import UserCard from '../../components/UserCard'
 import { MenuProvider } from 'react-native-popup-menu';
-import { getProfilePosts } from '../../redux/actions/PostActions'
+import { getPosts } from '../../redux/actions/PostActions'
 import ProfilePostCard from '../../components/ProfilePostCard'
 
-export const ProfileScreen = (props) => {
-  useEffect(() => {
-    props.getProfilePosts()
-}, [])
-
-if(props.post.loading){
-    return (
-        <View>
-    <Text style={{fontFamily:'OpenSans-Regular'}}>Loading...</Text>
-    </View>
-    )
+const wait = (timeout) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
 }
+
+export const ProfileScreen = (props) => {
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    props.getPosts()
+    setRefreshing(true);
+    wait(500).then(() => setRefreshing(false));
+  }, []);
+
+  useEffect(() => {
+    props.getPosts()
+  }, [])
   return (
-    <ScrollView>
+    <ScrollView refreshControl={
+      <RefreshControl
+        refreshing={refreshing}
+        onRefresh={onRefresh}
+      />
+    }>
       <MenuProvider>
         <UserCard />
       </MenuProvider>
-
       <Text style={styles.Text}>My Posts: </Text>
       <ScrollView>
-             {
-                props.post.postss.map((post) => {
-                    console.log(post)
-                    return (<ProfilePostCard post={post}/>);
-                })
+        {
+          props.post.posts.map((post) => {
+            if(post.Author == props.auth.currentUser.id){
+              console.log()
+              console.log({post})
+              return (<ProfilePostCard post={post} key={post.id} />);
             }
-        </ScrollView>
+          })
+        }
+      </ScrollView>
     </ScrollView>
 
   )
@@ -56,22 +66,21 @@ const styles = StyleSheet.create({
   Text: {
     color: '#333',
     padding: 20,
-    fontSize:20
+    fontSize: 20
   }
 
 })
 
 const mapStateToProps = (state) => {
   return {
-      auth: state.auth,
-      post: state.post
+    auth: state.auth,
+    post: state.post
   }
 };
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
-    getProfilePosts,
-    logoutUser
+    getPosts
   }, dispatch)
 )
 

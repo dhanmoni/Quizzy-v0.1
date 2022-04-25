@@ -124,9 +124,13 @@ const styles = StyleSheet.create({
     numbers: {
         padding: 12,
         fontSize: 14,
+        fontFamily:'OpenSans-Regular',
+        color: '#333'
     },
     title: {
         fontSize: 14,
+        fontFamily:'OpenSans-Regular',
+        color: '#333'
     },
     container: {
         padding: 5,
